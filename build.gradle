@@ -1,0 +1,180 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url='https://repo.spongepowered.org/repository/maven-public' }
+    }
+    dependencies {
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+
+
+version = "1.0.7"
+group = 'dev.ghen.thirst'
+
+java {
+    archivesBaseName = 'Thirst'
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+compileJava {
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.19.2'
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'thirst'
+
+            mods {
+                thirst {
+                    source sourceSets.main
+                }
+            }
+            arg "-mixin.config=thirst.mixin.json"
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'thirst'
+
+            mods {
+                thirst {
+                    source sourceSets.main
+                }
+            }
+            arg "-mixin.config=thirst.mixin.json"
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'thirst'
+
+            mods {
+                thirst {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'thirst', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                thirst {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven { // Registrate
+        url "https://maven.tterrag.com/"
+    }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.4'
+
+    implementation fg.deobf("com.simibubi.create:create-1.19.2:0.5.1.a-29:slim") { transitive = false }
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-1.19.2:0.6.8.a-14")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:MC1.19-1.1.5")
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation fg.deobf("curse.maven:jei-238222:4494410")
+    implementation fg.deobf("curse.maven:appleskin-248787:3872808")
+    implementation fg.deobf("curse.maven:cold-sweat-506194:4613946")
+    implementation fg.deobf("curse.maven:farmers-delight-398521:3999157")
+    implementation fg.deobf("curse.maven:farmers-respite-551453:4081312")
+    implementation fg.deobf("curse.maven:brewin-and-chewin-637808:4468049")
+    implementation fg.deobf("curse.maven:collectors-reap-807101:4485855")
+    implementation fg.deobf("curse.maven:create-central-kitchen-820977:4599830")
+}
+
+mixin {
+    add sourceSets.main, "thirst.refmap.json"
+    config 'thirst.mixin.json'
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "thirst",
+                "Specification-Vendor"    : "thirstsareus",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "thirstsareus",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "thirst.mixin.json"
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

@@ -1,0 +1,39 @@
+# The overall format is standard TOML format, v0.5.0.
+# Note that there are a couple of TOML lists in this file.
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+modLoader="javafml"
+loaderVersion="[43,)"
+license="MIT license"
+issueTrackerURL="https://github.com/mlus-asuka/Thrist-Renew/issues"
+[[mods]]
+modId="thirst"
+# ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
+version="1.19.2-1.0.7"
+displayName="Thirst Renew"
+# A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+displayURL="https://github.com/mlus-asuka/Thrist-Renew"
+logoFile="thirst.png"
+credits="Forked from Thirst was Taken"
+authors="mlus"
+description='''
+Modern take on the thirst-bar mechanic, compatible with a lot of contemporary mods
+'''
+[[dependencies.thirst]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.thirst]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.2,1.20)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.thirst]]
+    modId="create"
+    mandatory=false
+    versionRange="[0.5.1.a,)"
+    ordering="NONE"
+    side="BOTH"

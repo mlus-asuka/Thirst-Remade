@@ -1,0 +1,33 @@
+{
+  "required": true,
+  "package": "dev.ghen.thirst.foundation.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "thirst.refmap.json",
+  "mixins": [
+    "vip.fubuki.thirst.foundation.mixin.MixinAbstractFurnaceBlockEntity",
+    "vip.fubuki.thirst.foundation.mixin.MixinBottleItem",
+    "vip.fubuki.thirst.foundation.mixin.MixinBucketItem",
+    "vip.fubuki.thirst.foundation.mixin.MixinCampfireBlockEntity",
+    "vip.fubuki.thirst.foundation.mixin.MixinItemStack",
+    "vip.fubuki.thirst.foundation.mixin.MixinLayeredCauldronBlock",
+    "vip.fubuki.thirst.foundation.mixin.accessors.CampfireBlockEntityAccessor",
+    "vip.fubuki.thirst.foundation.mixin.accessors.brewinandchewin.KegBlockEntityAccessor",
+    "vip.fubuki.thirst.foundation.mixin.accessors.create.IFluidDrainingBehaviourAccessor",
+    "vip.fubuki.thirst.foundation.mixin.accessors.farmersdelight.SyncedBlockEntityAccessor",
+    "vip.fubuki.thirst.foundation.mixin.accessors.farmersrespite.KettleBlockEntityAccessor",
+    "vip.fubuki.thirst.foundation.mixin.brewinandchewin.MixinKegBlockEntity",
+    "vip.fubuki.thirst.foundation.mixin.create.MixinEmptyingByBasin",
+    "vip.fubuki.thirst.foundation.mixin.create.MixinFanProcessing",
+    "vip.fubuki.thirst.foundation.mixin.create.MixinFillingBySpout",
+    "vip.fubuki.thirst.foundation.mixin.create.MixinFluidDrainingBehaviour",
+    "vip.fubuki.thirst.foundation.mixin.create.MixinGenericItemFilling",
+    "vip.fubuki.thirst.foundation.mixin.create.MixinOpenEndedPipe",
+    "vip.fubuki.thirst.foundation.mixin.createcenterkitchen.MixinKettlePoint",
+    "vip.fubuki.thirst.foundation.mixin.farmersrespite.MixinKettleBlock",
+    "vip.fubuki.thirst.foundation.mixin.farmersrespite.MixinKettleBlockEntity"
+  ],
+  "client": [
+    "vip.fubuki.thirst.foundation.mixin.farmersrespite.MixinKettleScreen"
+  ],
+  "minVersion": "0.8"
+}
