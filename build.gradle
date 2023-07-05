@@ -18,11 +18,11 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = "1.0.7"
-group = 'dev.ghen.thirst'
+version = "1.0.0"
+group = 'vip.fubuki.thirst'
 
 java {
-    archivesBaseName = 'Thirst'
+    archivesBaseName = 'ThirstRenew'
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 compileJava {
