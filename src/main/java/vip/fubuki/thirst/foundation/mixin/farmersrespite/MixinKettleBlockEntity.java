@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
-import umpaz.farmersrespite.common.crafting.KettleRecipe;
+import com.farmersrespite.common.block.entity.KettleBlockEntity;
+import com.farmersrespite.common.crafting.KettleRecipe;
 
 import java.util.Optional;
 
@@ -29,7 +29,7 @@ public abstract class MixinKettleBlockEntity {
         if (isHeated && kettleAcc.invokeHasInput()) {
             Optional<KettleRecipe> recipe = kettleAcc.invokeGetMatchingRecipe(new RecipeWrapper(kettle.getInventory()));
             if (recipe.isPresent() && kettleAcc.invokeCanBrew(recipe.get()) && WaterPurity.isWaterFilledContainer(recipe.get().getResultItem())) {
-                didInventoryChange = kettleAcc.invokeProcessBrewing(recipe.get(), kettle);
+                didInventoryChange = kettleAcc.invokeProcessBrewing(recipe.get());
                 if(didInventoryChange) {
                     int purity = Math.min(WaterPurity.getBlockPurity(kettle.getBlockState()) + CommonConfig.KETTLE_PURIFICATION_LEVELS.get().intValue(), WaterPurity.MAX_PURITY);
                     kettle.getInventory().setStackInSlot(2, WaterPurity.addPurity(kettle.getInventory().getStackInSlot(2).copy(), purity));

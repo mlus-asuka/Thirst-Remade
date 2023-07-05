@@ -4,12 +4,12 @@ import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.transfer.GenericItemEmptying;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.foundation.utility.Pair;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import vip.fubuki.thirst.content.purity.WaterPurity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -69,7 +69,7 @@ public class MixinEmptyingByBasin
         ItemStack split = stack.copy();
         split.setCount(1);
         LazyOptional<IFluidHandlerItem> capability =
-                split.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
+                split.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
         IFluidHandlerItem tank = capability.orElse(null);
 
         if (tank == null) {

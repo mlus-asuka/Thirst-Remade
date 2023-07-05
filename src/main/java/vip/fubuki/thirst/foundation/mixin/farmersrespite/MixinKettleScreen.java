@@ -1,5 +1,6 @@
 package vip.fubuki.thirst.foundation.mixin.farmersrespite;
 
+import net.minecraft.network.chat.TranslatableComponent;
 import vip.fubuki.thirst.content.purity.WaterPurity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -7,8 +8,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import umpaz.farmersrespite.client.gui.KettleScreen;
-import umpaz.farmersrespite.common.block.KettleBlock;
+import com.farmersrespite.client.gui.KettleScreen;
+import com.farmersrespite.common.block.KettleBlock;
 
 import java.util.Objects;
 
@@ -16,16 +17,16 @@ import java.util.Objects;
 public abstract class MixinKettleScreen
 {
 
-    @Redirect(method = "renderWaterBarIndicatorTooltip", at = @At(value = "INVOKE", target = "Lumpaz/farmersrespite/common/utility/FRTextUtils;getTranslation(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"), remap = false)
+    @Redirect(method = "renderWaterBarIndicatorTooltip", at = @At(value = "INVOKE", target = "Lcom/farmersrespite/core/utility/FRTextUtils;getTranslation(Ljava/lang/String;[Ljava/lang/Object;)Lnet/minecraft/network/chat/MutableComponent;"), remap = false)
     private MutableComponent addPurityTooltip(String key, Object[] oldArgs)
     {
         BlockState state = Objects.requireNonNull(((KettleScreen) (Object) this).getMenu().tileEntity.getLevel()).getBlockState(((KettleScreen)(Object)this).getMenu().tileEntity.getBlockPos());
 
         int waterLevel = state.getValue(KettleBlock.WATER_LEVEL);
         int purity = WaterPurity.getBlockPurity(state);
-        String purityString = purity == 0 ? Component.translatable("thirst.purity.dirty").getString() :
-                purity == 1 ? Component.translatable("thirst.purity.slightly_dirty").getString():
-                        purity == 2 ? Component.translatable("thirst.purity.acceptable").getString() : Component.translatable("thirst.purity.purified").getString();
+        String purityString = purity == 0 ? new TranslatableComponent("thirst.purity.dirty").getString() :
+                purity == 1 ? new TranslatableComponent("thirst.purity.slightly_dirty").getString():
+                        purity == 2 ? new TranslatableComponent("thirst.purity.acceptable").getString() : new TranslatableComponent("thirst.purity.purified").getString();
 
         Object[] args;
         if(purity == -1 || waterLevel == 0)
@@ -40,6 +41,6 @@ public abstract class MixinKettleScreen
         {
             args = new Object[]{waterLevel, purityString};
         }
-        return Component.translatable("thirst." + key, args);
+        return new TranslatableComponent("thirst." + key, args);
     }
 }

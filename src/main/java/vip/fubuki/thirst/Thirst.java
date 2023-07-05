@@ -15,7 +15,6 @@ import vip.fubuki.thirst.foundation.gui.appleskin.HUDOverlayHandler;
 import vip.fubuki.thirst.foundation.gui.appleskin.TooltipOverlayHandler;
 import vip.fubuki.thirst.foundation.network.ThirstModPacketHandler;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -37,9 +36,8 @@ public class Thirst
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modBus.addListener(this::commonSetup);
-        modBus.addListener(this::clientSetup);
         modBus.addListener(this::registerCapabilities);
-        modBus.addListener(ThirstBarRenderer::registerThirstOverlay);
+        ThirstBarRenderer.register();
 
         ItemInit.ITEMS.register(modBus);
 
@@ -51,7 +49,6 @@ public class Thirst
         {
             HUDOverlayHandler.init();
             TooltipOverlayHandler.init();
-            modBus.addListener(this::onRegisterClientTooltipComponentFactories);
         }
 
         //configs
@@ -69,21 +66,13 @@ public class Thirst
             ThirstHelper.shouldUseColdSweatCaps(true);
     }
 
-    private void clientSetup(final FMLClientSetupEvent event)
-    {
-    }
-
     public void registerCapabilities(RegisterCapabilitiesEvent event)
     {
         event.register(IThirstCap.class);
     }
 
-    //this is from Create but it looked very cool
     public static ResourceLocation asResource(String path)
     {
         return new ResourceLocation(ID, path);
-    }
-    private void onRegisterClientTooltipComponentFactories(RegisterClientTooltipComponentFactoriesEvent event) {
-        TooltipOverlayHandler.register(event);
     }
 }

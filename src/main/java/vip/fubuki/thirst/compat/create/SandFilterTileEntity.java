@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import vip.fubuki.thirst.content.purity.WaterPurity;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import net.minecraft.ChatFormatting;
@@ -21,7 +22,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +58,7 @@ public class SandFilterTileEntity  extends SmartBlockEntity implements IHaveGogg
 
     @Override
     public <T> @NotNull LazyOptional<T> getCapability(@NotNull Capability<T> cap, Direction side) {
-        if (cap == ForgeCapabilities.FLUID_HANDLER && side != null && side.getAxis() == Direction.Axis.Y)
+        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY && side != null && side.getAxis() == Direction.Axis.Y)
         {
             if(side == Direction.DOWN)
                 return purifiedTank.getCapability()

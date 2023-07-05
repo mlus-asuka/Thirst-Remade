@@ -1,10 +1,12 @@
 package vip.fubuki.thirst.api;
 
+import dev.momostudios.coldsweat.api.temperature.Temperature;
+import dev.momostudios.coldsweat.api.util.TempHelper;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.config.ItemSettingsConfig;
 import vip.fubuki.thirst.foundation.util.ConfigHelper;
 import vip.fubuki.thirst.foundation.util.LoadedValue;
-import dev.momostudios.coldsweat.api.util.Temperature;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -121,7 +123,7 @@ public class ThirstHelper
             float temp = biome.getBaseTemperature() + 0.2f;
 
             if(useColdSweatCaps)
-                temp = (float) (Temperature.get(player, Temperature.Type.BODY) / 100f);
+                temp = (float) (TempHelper.getTemperature(player, Temperature.Type.BODY).get() / 100f);
             else
             {
                 if(temp <= 0)

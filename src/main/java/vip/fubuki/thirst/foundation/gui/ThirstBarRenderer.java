@@ -1,56 +1,62 @@
 package vip.fubuki.thirst.foundation.gui;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import vip.fubuki.thirst.Thirst;
 import vip.fubuki.thirst.foundation.common.capability.IThirstCap;
 import vip.fubuki.thirst.foundation.common.capability.ModCapabilities;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.IIngameOverlay;
+import net.minecraftforge.client.gui.OverlayRegistry;
 
+@OnlyIn(Dist.CLIENT)
 public class ThirstBarRenderer
 {
     public static IThirstCap PLAYER_THIRST = null;
     public static ResourceLocation THIRST_ICONS = Thirst.asResource("textures/gui/thirst_icons.png");
     static Minecraft minecraft = Minecraft.getInstance();
-    protected final static RandomSource random = RandomSource.create();
-    public static IGuiOverlay THIRST_OVERLAY = (gui, poseStack, partialTicks, screenWidth, screenHeight) ->
+
+    public static final IIngameOverlay THIRST_OVERLAY = OverlayRegistry.registerOverlayAbove(ForgeIngameGui.FOOD_LEVEL_ELEMENT, "Thirst Level", (gui, poseStack, partialTicks, screenWidth, screenHeight) ->
     {
-        boolean isMounted = gui.getMinecraft().player.getVehicle() instanceof LivingEntity;
-        if (!isMounted && !gui.getMinecraft().options.hideGui && gui.shouldDrawSurvivalElements())
+        boolean isMounted = minecraft.player.getVehicle() instanceof LivingEntity;
+        if (!isMounted && !minecraft.options.hideGui && gui.shouldDrawSurvivalElements())
         {
             gui.setupOverlayRenderState(true, false);
             render(gui, screenWidth, screenHeight, poseStack);
         }
-    };
+    });
 
-    public static void registerThirstOverlay(RegisterGuiOverlaysEvent event)
+    public static void register()
     {
-        event.registerAbove(VanillaGuiOverlay.FOOD_LEVEL.id(), "thirst_level", THIRST_OVERLAY);
+
     }
-    public static void render(ForgeGui gui, int width, int height, PoseStack poseStack)
+
+    public static void render(ForgeIngameGui gui, int screenWidth, int screenHeight, PoseStack poseStack)
     {
+        //wtf is a poseStack?
+
         minecraft.getProfiler().push("thirst");
         if (PLAYER_THIRST == null || minecraft.player.tickCount % 40 == 0)
         {
             PLAYER_THIRST = minecraft.player.getCapability(ModCapabilities.PLAYER_THIRST).orElse(null);
         }
 
-        Player player = (Player) gui.getMinecraft().getCameraEntity();
         RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, THIRST_ICONS);
-        int left = width / 2 + 91;
-        int top = height - gui.rightHeight;
-        gui.rightHeight += 10;
-        boolean unused = false;// Unused flag in vanilla, seems to be part of a 'fade out' mechanic
+
+        int left = screenWidth / 2 + 91;
+        int top = screenHeight - gui.right_height;
+        gui.right_height += 10;
 
         int level = PLAYER_THIRST.getThirst();
 
@@ -60,11 +66,6 @@ public class ThirstBarRenderer
             int x = left - i * 8 - 9;
             int y = top;
 
-            if (PLAYER_THIRST.getQuenched() <= 0.0F && gui.getGuiTicks() % (level * 3 + 1) == 0)
-            {
-                y = top + (random.nextInt(3) - 1);
-            }
-
             GuiComponent.blit(poseStack, x, y, 0, 0, 9, 9, 25, 9);
 
             if (idx < level)
@@ -72,6 +73,7 @@ public class ThirstBarRenderer
             else if (idx == level)
                 GuiComponent.blit(poseStack, x, y, 8, 0, 9, 9, 25, 9);
         }
+
         RenderSystem.disableBlend();
         RenderSystem.setShaderTexture(0, GuiComponent.GUI_ICONS_LOCATION);
 

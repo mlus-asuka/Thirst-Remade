@@ -4,8 +4,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
-import umpaz.farmersrespite.common.block.entity.KettleBlockEntity;
-import umpaz.farmersrespite.common.crafting.KettleRecipe;
+import com.farmersrespite.common.block.entity.KettleBlockEntity;
+import com.farmersrespite.common.crafting.KettleRecipe;
 
 import java.util.Optional;
 
@@ -26,5 +26,5 @@ public interface KettleBlockEntityAccessor
     void invokeUseStoredContainersOnMeal();
 
     @Invoker(remap = false)
-    boolean invokeProcessBrewing(KettleRecipe recipe, KettleBlockEntity kettle);
+    boolean invokeProcessBrewing(KettleRecipe recipe);
 }

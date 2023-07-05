@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import umpaz.brewinandchewin.common.block.entity.KegBlockEntity;
-import umpaz.brewinandchewin.common.crafting.KegRecipe;
+import com.brewinandchewin.common.block.entity.KegBlockEntity;
+import com.brewinandchewin.common.crafting.KegRecipe;
 
 import java.util.Optional;
 
@@ -34,7 +34,7 @@ public class MixinKegBlockEntity
             if (recipe.isPresent() && kegAcc.invokeCanFerment(recipe.get()) &&
                     WaterPurity.isWaterFilledContainer(recipe.get().getResultItem()))
             {
-                didInventoryChange = kegAcc.invokeProcessFermenting(recipe.get(), keg);
+                didInventoryChange = kegAcc.invokeProcessFermenting(recipe.get());
                 if(!WaterPurity.hasPurity(keg.getInventory().getStackInSlot(4))) return;
                 int purity = WaterPurity.getPurity(keg.getInventory().getStackInSlot(4));
                 if(didInventoryChange)
@@ -51,12 +51,12 @@ public class MixinKegBlockEntity
         } else
             return;
 
-        ItemStack mealStack = keg.getDrink();
+        ItemStack mealStack = keg.getMeal();
         if (!mealStack.isEmpty())
         {
-            if (!kegAcc.invokeDoesDrinkHaveContainer(mealStack))
+            if (!kegAcc.invokeDoesMealHaveContainer(mealStack))
             {
-                kegAcc.invokeMoveDrinkToOutput();
+                kegAcc.invokeMoveMealToOutput();
                 didInventoryChange = true;
             } else if (!keg.getInventory().getStackInSlot(6).isEmpty())
             {

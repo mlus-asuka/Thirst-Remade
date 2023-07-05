@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import plus.dragons.createcentralkitchen.content.logistics.block.mechanicalArm.KettlePoint;
 import plus.dragons.createcentralkitchen.content.logistics.item.guide.brewing.BrewingGuide;
-import umpaz.farmersrespite.common.block.KettleBlock;
+import com.farmersrespite.common.block.KettleBlock;
 
 @Mixin(KettlePoint.class)
 public abstract class MixinKettlePoint extends ArmInteractionPoint {

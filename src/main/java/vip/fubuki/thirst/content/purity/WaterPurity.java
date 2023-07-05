@@ -1,20 +1,18 @@
 package vip.fubuki.thirst.content.purity;
 
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import vip.fubuki.thirst.api.ThirstHelper;
 import vip.fubuki.thirst.content.registry.ItemInit;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.util.MathHelper;
 import vip.fubuki.thirst.foundation.util.ReflectionUtil;
-import net.brdle.collectorsreap.common.item.CRItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -44,8 +42,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.jetbrains.annotations.NotNull;
-import umpaz.brewinandchewin.common.registry.BCItems;
-import umpaz.farmersrespite.common.registry.FRItems;
+import com.brewinandchewin.core.registry.BCItems;
+import com.farmersrespite.core.registry.FRItems;
 import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.lang.reflect.Method;
@@ -93,10 +91,6 @@ public class WaterPurity
         if(ModList.get().isLoaded("brewinandchewin")) {
             registerBrewinAndChewinContainers();
         }
-
-        if (ModList.get().isLoaded("collectorsreap")){
-            registerCollectorsReapContainers();
-        }
     }
 
     private static void registerContainers()
@@ -116,11 +110,6 @@ public class WaterPurity
         waterContainers.add(new ContainerWithPurity(new ItemStack(ModItems.APPLE_CIDER.get())));
     }
 
-    private static void registerCollectorsReapContainers(){
-        waterContainers.add(new ContainerWithPurity(new ItemStack(CRItems.POMEGRANATE_BLACK_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(CRItems.LIME_GREEN_TEA.get())));
-    }
-
     private static void registerFarmersRespiteContainers()
     {
         waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.GREEN_TEA.get())));
@@ -129,7 +118,6 @@ public class WaterPurity
         waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.ROSE_HIP_TEA.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.DANDELION_TEA.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.COFFEE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.GAMBLERS_TEA.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.PURULENT_TEA.get())));
     }
 
@@ -190,7 +178,7 @@ public class WaterPurity
             ItemStack item = event.getItemStack();
             if(canHarvestRunningWater(item))
             {
-                Player player = event.getEntity();
+                Player player = (Player) event.getEntity();
                 Level level = player.getLevel();
                 BlockPos blockPos = MathHelper.getPlayerPOVHitResult(player.getLevel(), player, ClipContext.Fluid.ANY).getBlockPos();
 
@@ -245,8 +233,7 @@ public class WaterPurity
 
                 assert purityText != null;
                 event.getToolTip()
-                        .add(MutableComponent
-                                .create(new LiteralContents(purityText))
+                        .add((new TextComponent(purityText))
                                 .setStyle(Style.EMPTY.withColor(purityColor)));
             }
         }
@@ -320,7 +307,7 @@ public class WaterPurity
                 purity == 1 ? "slightly_dirty" :
                         purity == 2 ? "acceptable" : "purified";
 
-        return MutableComponent.create(new TranslatableContents("thirst.purity." + purityText)).getString();
+        return (new TranslatableComponent("thirst.purity." + purityText)).getString();
     }
 
     /**

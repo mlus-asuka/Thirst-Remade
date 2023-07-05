@@ -1,14 +1,9 @@
 package vip.fubuki.thirst.foundation.mixin;
 
-import vip.fubuki.thirst.content.purity.WaterPurity;
-import vip.fubuki.thirst.foundation.config.CommonConfig;
-import vip.fubuki.thirst.foundation.mixin.accessors.CampfireBlockEntityAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -20,6 +15,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import vip.fubuki.thirst.content.purity.WaterPurity;
+import vip.fubuki.thirst.foundation.config.CommonConfig;
+import vip.fubuki.thirst.foundation.mixin.accessors.CampfireBlockEntityAccessor;
+
+import java.util.Random;
 
 @Mixin(CampfireBlockEntity.class)
 public class MixinCampfireBlockEntity
@@ -55,7 +55,7 @@ public class MixinCampfireBlockEntity
     }
 
     @Inject(method = "placeFood", at = @At("HEAD"))
-    private void blockPotions(Entity p_238285_, ItemStack item, int p_238287_, CallbackInfoReturnable<Boolean> cir)
+    private void blockPotions(ItemStack item, int p_59055_, CallbackInfoReturnable<Boolean> cir)
     {
         if(WaterPurity.isWaterFilledContainer(item))
         {
@@ -69,7 +69,7 @@ public class MixinCampfireBlockEntity
     @Inject(method = "particleTick", at = @At("HEAD"), cancellable = true)
     private static void waterVapour(Level level, BlockPos pos, BlockState blockState, CampfireBlockEntity campfire, CallbackInfo ci)
     {
-        RandomSource random = level.random;
+        Random random = level.random;
         int l = blockState.getValue(CampfireBlock.FACING).get2DDataValue();
         boolean cancel = false;
 
