@@ -22,11 +22,19 @@ version = "1.0.0"
 group = 'vip.fubuki.thirst'
 
 java {
-    archivesBaseName = 'ThirstRenew'
+    archivesBaseName = 'ThirstRemade'
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 compileJava {
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+}
+
+processResources {
+    from(project.rootDir) {
+        include 'README.md'
+        include 'LICENSE.txt'
+        into '/'
+    }
 }
 
 minecraft {

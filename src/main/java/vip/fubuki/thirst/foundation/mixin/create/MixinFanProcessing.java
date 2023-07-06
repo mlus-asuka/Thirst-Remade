@@ -1,5 +1,8 @@
 package vip.fubuki.thirst.foundation.mixin.create;
 import com.simibubi.create.content.kinetics.fan.FanProcessing;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.material.Fluids;
 import vip.fubuki.thirst.content.purity.WaterPurity;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import net.minecraft.world.item.ItemStack;
@@ -38,7 +41,7 @@ public class MixinFanProcessing {
                 .getRecipeFor(RecipeType.SMOKING, RECIPE_WRAPPER, world);
 
         if (type == FanProcessing.Type.BLASTING) {
-            if(stack.getItem() == Items.POTION){
+            if(stack.getItem() == Items.POTION && PotionUtils.getPotion(stack)== Potions.WATER){
                 WaterPurity.addPurity(stack, Math.min(WaterPurity.getPurity(stack) + CommonConfig.FURNACE_PURIFICATION_LEVELS.get().intValue() , WaterPurity.MAX_PURITY));
                 List<ItemStack> list = new ArrayList<>();
                 list.add(stack);

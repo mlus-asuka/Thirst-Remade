@@ -9,10 +9,10 @@ issueTrackerURL="https://github.com/mlus-asuka/Thrist-Renew/issues"
 modId="thirst"
 # ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
 version="1.19.2-1.0.0"
-displayName="Thirst Renew"
+displayName="Thirst Remade"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
-displayURL="https://github.com/mlus-asuka/Thrist-Renew"
+displayURL="https://github.com/mlus-asuka/Thrist-Remade"
 logoFile="thirst.png"
 credits="Forked from Thirst was Taken"
 authors="mlus"
