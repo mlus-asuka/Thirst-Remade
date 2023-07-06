@@ -20,20 +20,32 @@ public abstract class MixinFluidDrainingBehaviour
 
     @Shadow public abstract boolean pullNext(BlockPos root, boolean simulate);
 
-    @Inject(method = "getDrainableFluid", at = @At("HEAD"), cancellable = true, remap = false)
-    public void getDrainableFluid(BlockPos rootPos, CallbackInfoReturnable<FluidStack> cir)
-    {
+//    @Inject(method = "getDrainableFluid", at = @At("HEAD"), cancellable = true, remap = false)
+//    public void getDrainableFluid(BlockPos rootPos, CallbackInfoReturnable<FluidStack> cir)
+//    {
+//        FluidDrainingBehaviour behaviour = ((FluidDrainingBehaviour)(Object) this);
+//        if(((IFluidDrainingBehaviourAccessor)behaviour).getFluid() != null && !this.isSearching() && this.pullNext(rootPos, true))
+//        {
+//            FluidStack output = new FluidStack(((IFluidDrainingBehaviourAccessor)behaviour).getFluid(), 1000);
+//            if(FluidHelper.isWater(output.getFluid()))
+//            {
+//                CompoundTag tag = output.getOrCreateTag();
+//                tag.putInt("Purity", WaterPurity.getBlockPurity(behaviour.getWorld(), rootPos));
+//                output.setTag(tag);
+//                cir.setReturnValue(output);
+//            }
+//        }
+//    }
+
+    @Inject(method = "getDrainableFluid", at = @At("RETURN"), remap = false)
+    public void getDrainableFluid(BlockPos rootPos, CallbackInfoReturnable<FluidStack> cir){
         FluidDrainingBehaviour behaviour = ((FluidDrainingBehaviour)(Object) this);
-        if(((IFluidDrainingBehaviourAccessor)behaviour).getFluid() != null && !this.isSearching() && this.pullNext(rootPos, true))
-        {
-            FluidStack output = new FluidStack(((IFluidDrainingBehaviourAccessor)behaviour).getFluid(), 1000);
-            if(FluidHelper.isWater(output.getFluid()))
-            {
-                CompoundTag tag = output.getOrCreateTag();
+        FluidStack output=cir.getReturnValue();
+        if (FluidHelper.isWater(output.getFluid())){
+            CompoundTag tag = output.getOrCreateTag();
                 tag.putInt("Purity", WaterPurity.getBlockPurity(behaviour.getWorld(), rootPos));
                 output.setTag(tag);
                 cir.setReturnValue(output);
-            }
         }
     }
 }
