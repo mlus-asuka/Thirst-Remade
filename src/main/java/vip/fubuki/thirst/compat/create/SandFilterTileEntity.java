@@ -74,7 +74,7 @@ public class SandFilterTileEntity  extends SmartBlockEntity implements IHaveGogg
     {
         super.tick();
 
-        if(!level.isClientSide() && dirtyTank.getPrimaryHandler().getFluidAmount() > CommonConfig.SAND_FILTER_MB_PER_TICK.get().intValue() &&
+        if(!level.isClientSide() && dirtyTank.getPrimaryHandler().getFluidAmount() >= CommonConfig.SAND_FILTER_MB_PER_TICK.get().intValue() &&
                 purifiedTank.getPrimaryHandler().getFluidAmount() < TANK_SIZE)
         {
             FluidStack water = dirtyTank.getPrimaryHandler().drain(CommonConfig.SAND_FILTER_MB_PER_TICK.get().intValue(), IFluidHandler.FluidAction.EXECUTE);
@@ -99,6 +99,15 @@ public class SandFilterTileEntity  extends SmartBlockEntity implements IHaveGogg
         buildTooltip(tooltip, mb, dirtyWaterAmount, dirtyTank);
 
         buildTooltip(tooltip, mb, purifiedWaterAmount, purifiedTank);
+
+        if(dirtyTank.isEmpty() && purifiedTank.isEmpty()){
+            Lang.translate("gui.goggles.fluid_container.capacity")
+                    .add(Lang.number(dirtyTank.getPrimaryHandler().getTankCapacity(0))
+                            .add(mb)
+                            .style(ChatFormatting.GOLD))
+                    .style(ChatFormatting.GRAY)
+                    .forGoggles(tooltip, 1);
+        }
 
         return !dirtyTank.isEmpty() || !purifiedTank.isEmpty();
     }

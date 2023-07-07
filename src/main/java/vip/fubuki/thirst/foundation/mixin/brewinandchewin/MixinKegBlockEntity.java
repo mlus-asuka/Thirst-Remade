@@ -34,13 +34,10 @@ public class MixinKegBlockEntity
             if (recipe.isPresent() && kegAcc.invokeCanFerment(recipe.get()) &&
                     WaterPurity.isWaterFilledContainer(recipe.get().getResultItem()))
             {
-                didInventoryChange = kegAcc.invokeProcessFermenting(recipe.get(), keg);
-                if(!WaterPurity.hasPurity(keg.getInventory().getStackInSlot(4))) return;
                 int purity = WaterPurity.getPurity(keg.getInventory().getStackInSlot(4));
+                didInventoryChange = kegAcc.invokeProcessFermenting(recipe.get(), keg);
                 if(didInventoryChange)
                 {
-
-
                     purity = purity < CommonConfig.FERMENTATION_MOLDING_THRESHOLD.get().intValue() ?
                             Math.max(purity - CommonConfig.FERMENTATION_MOLDING_HARSHNESS.get().intValue(), WaterPurity.MIN_PURITY) : purity;
 

@@ -5,10 +5,8 @@ import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -46,17 +44,5 @@ public class SandFilterBlock extends Block implements IWrenchable, IBE<SandFilte
     public BlockEntityType<? extends SandFilterTileEntity> getBlockEntityType() {
         return CreateRegistry.SAND_FILTER_TE.get();
     }
-
-    @Override
-    public InteractionResult onWrenched(BlockState state, UseOnContext context) {
-        return IWrenchable.super.onWrenched(state, context);
-    }
-
-    @Override
-    public InteractionResult onSneakWrenched(BlockState state, UseOnContext context) {
-        return IWrenchable.super.onSneakWrenched(state, context);
-    }
-
-
 
 }

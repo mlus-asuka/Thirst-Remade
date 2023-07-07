@@ -4,8 +4,9 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import vip.fubuki.thirst.api.ThirstHelper;
 import vip.fubuki.thirst.compat.create.CreateRegistry;
+import vip.fubuki.thirst.compat.create.ponder.ThirstPonders;
 import vip.fubuki.thirst.content.purity.WaterPurity;
-import vip.fubuki.thirst.content.registry.ItemInit;
+import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.common.capability.IThirstCap;
 import vip.fubuki.thirst.foundation.config.ClientConfig;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
@@ -41,7 +42,7 @@ public class Thirst
         modBus.addListener(this::registerCapabilities);
         modBus.addListener(ThirstBarRenderer::registerThirstOverlay);
 
-        ItemInit.ITEMS.register(modBus);
+        ThirstItem.register();
 
         if(ModList.get().isLoaded("create"))
         {
@@ -71,6 +72,9 @@ public class Thirst
 
     private void clientSetup(final FMLClientSetupEvent event)
     {
+        if(ModList.get().isLoaded("create")){
+            event.enqueueWork(ThirstPonders::register);
+        }
     }
 
     public void registerCapabilities(RegisterCapabilitiesEvent event)

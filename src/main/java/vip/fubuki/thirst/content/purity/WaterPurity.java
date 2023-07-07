@@ -1,7 +1,7 @@
 package vip.fubuki.thirst.content.purity;
 
 import vip.fubuki.thirst.api.ThirstHelper;
-import vip.fubuki.thirst.content.registry.ItemInit;
+import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.util.MathHelper;
 import vip.fubuki.thirst.foundation.util.ReflectionUtil;
@@ -104,8 +104,8 @@ public class WaterPurity
         waterContainers.add(new ContainerWithPurity(new ItemStack(Items.GLASS_BOTTLE),
                 PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER)).setEqualsFilled(itemStack ->
                 itemStack.is(Items.POTION) && PotionUtils.getPotion(itemStack) == Potions.WATER));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(ItemInit.TERRACOTTA_BOWL.get()),
-                new ItemStack(ItemInit.TERRACOTTA_WATER_BOWL.get())));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(ThirstItem.TERRACOTTA_BOWL.get()),
+                new ItemStack(ThirstItem.TERRACOTTA_WATER_BOWL.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(Items.BUCKET),
                 new ItemStack(Items.WATER_BUCKET), false).canHarvestRunningWater(false));
     }
@@ -204,10 +204,10 @@ public class WaterPurity
                         sound = SoundEvents.BOTTLE_FILL;
                         filledItem = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
                     }
-                    else if(item.getItem() == ItemInit.TERRACOTTA_BOWL.get())
+                    else if(item.getItem() == ThirstItem.TERRACOTTA_BOWL.get())
                     {
                         sound = SoundEvents.BUCKET_FILL;
-                        filledItem = new ItemStack(ItemInit.TERRACOTTA_WATER_BOWL.get());
+                        filledItem = new ItemStack(ThirstItem.TERRACOTTA_WATER_BOWL.get());
                     }
                     else
                         return;

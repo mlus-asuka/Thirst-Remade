@@ -1,7 +1,7 @@
 package vip.fubuki.thirst.foundation.tab;
 
 import vip.fubuki.thirst.content.purity.WaterPurity;
-import vip.fubuki.thirst.content.registry.ItemInit;
+import vip.fubuki.thirst.content.registry.ThirstItem;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +22,7 @@ public class ThirstTab extends CreativeModeTab
     @Override
     public @NotNull ItemStack makeIcon()
     {
-        return new ItemStack(ItemInit.TERRACOTTA_WATER_BOWL.get());
+        return new ItemStack(ThirstItem.TERRACOTTA_WATER_BOWL.get());
     }
 
     @Override
