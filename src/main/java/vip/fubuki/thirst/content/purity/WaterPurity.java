@@ -75,6 +75,8 @@ public class WaterPurity
     public static final IntegerProperty BLOCK_PURITY = IntegerProperty.create("purity", 0, 4);
     public static boolean FarmersDelightLoaded = false;
 
+    public static boolean FarmersRespiteLoaded = false;
+
     public static void init()
     {
         registerDispenserBehaviours();
@@ -88,6 +90,7 @@ public class WaterPurity
         if(ModList.get().isLoaded("farmersrespite"))
         {
             registerFarmersRespiteContainers();
+            FarmersRespiteLoaded=true;
         }
 
         if(ModList.get().isLoaded("brewinandchewin")) {
@@ -192,7 +195,7 @@ public class WaterPurity
             {
                 Player player = event.getEntity();
                 Level level = player.getLevel();
-                BlockPos blockPos = MathHelper.getPlayerPOVHitResult(player.getLevel(), player, ClipContext.Fluid.ANY).getBlockPos();
+                BlockPos blockPos = MathHelper.getPlayerPOVHitResult(level, player, ClipContext.Fluid.ANY).getBlockPos();
 
                 if(level.getFluidState(blockPos).is(FluidTags.WATER))
                 {

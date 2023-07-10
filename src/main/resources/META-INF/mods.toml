@@ -4,7 +4,7 @@
 modLoader="javafml"
 loaderVersion="[43,)"
 license="MIT license"
-issueTrackerURL="https://github.com/mlus-asuka/Thrist-Renew/issues"
+issueTrackerURL="https://github.com/mlus-asuka/Thrist-Remade/issues"
 [[mods]]
 modId="thirst"
 # ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
