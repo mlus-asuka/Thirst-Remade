@@ -34,7 +34,7 @@ public class SandFilterScene {
         scene.world.modifyBlockEntity(tankAbove, FluidTankBlockEntity.class, be -> be.getTankInventory()
                 .fill(content, IFluidHandler.FluidAction.EXECUTE));
 
-        scene.idle(20);
+        scene.idle(30);
 
         scene.overlay.showText(70)
                 .attachKeyFrame()
@@ -42,11 +42,10 @@ public class SandFilterScene {
                 .placeNearTarget()
                 .pointAt(util.vector.blockSurface(tankAbove,Direction.WEST));
 
+        scene.idle(50);
 
         scene.world.modifyBlockEntity(tankAbove, FluidTankBlockEntity.class, be -> be.getTankInventory()
                 .drain(4000, IFluidHandler.FluidAction.EXECUTE));
-
-        scene.idle(50);
 
         scene.overlay.showText(60)
                 .attachKeyFrame()

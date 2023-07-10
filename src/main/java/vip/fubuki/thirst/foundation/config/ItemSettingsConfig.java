@@ -53,7 +53,13 @@ public class ItemSettingsConfig
                                         Arrays.asList("brewinandchewin:dread_nog", 12, 22),
                                         Arrays.asList("brewinandchewin:kombucha", 14, 22),
                                         Arrays.asList("brewinandchewin:red_rum", 14, 22),
-                                        Arrays.asList("brewinandchewin:steel_toe_stout", 14, 22)
+                                        Arrays.asList("brewinandchewin:steel_toe_stout", 14, 22),
+                                        Arrays.asList("collectorsreap:pink_limeade",8,10),
+                                        Arrays.asList("collectorsreap:berry_limeade",8,13),
+                                        Arrays.asList("collectorsreap:limeade",8,13),
+                                        Arrays.asList("collectorsreap:pink_limeade",8,13),
+                                        Arrays.asList("collectorsreap:pomegranate_black_tea",10,14),
+                                        Arrays.asList("collectorsreap:lime_green_tea",10,14)
                                 ),
                         it -> it instanceof List && ((List<?>) it).get(0) instanceof String && ((List<?>) it).get(1) instanceof Number);
 
@@ -88,7 +94,11 @@ public class ItemSettingsConfig
                                         Arrays.asList("farmersdelight:fish_stew", 4, 5),
                                         Arrays.asList("farmersdelight:pumpkin_soup", 4, 5),
                                         Arrays.asList("farmersdelight:baked_cod_stew", 4, 5),
-                                        Arrays.asList("farmersdelight:noodle_soup", 4, 5)
+                                        Arrays.asList("farmersdelight:noodle_soup", 4, 5),
+                                        Arrays.asList("collectorsreap:lime_slice",1,2),
+                                        Arrays.asList("collectorsreap:lime",2,3),
+                                        Arrays.asList("collectorsreap:portobello_rice_soup",6,8),
+                                        Arrays.asList("collectorsreap:lime_popsicle",7,9)
                                 ),
                         it -> it instanceof List && ((List<?>) it).get(0) instanceof String && ((List<?>) it).get(1) instanceof Number);
 

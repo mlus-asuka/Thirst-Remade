@@ -2,6 +2,7 @@ package vip.fubuki.thirst.foundation.common.capability;
 
 import vip.fubuki.thirst.api.ThirstHelper;
 import vip.fubuki.thirst.foundation.common.damagesource.ModDamageSource;
+import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.network.ThirstModPacketHandler;
 import vip.fubuki.thirst.foundation.network.message.PlayerThirstSyncMessage;
 import net.minecraft.nbt.CompoundTag;
@@ -152,7 +153,14 @@ public class PlayerThirstCap implements IThirstCap
             {
                 double dist = (Math.abs(player.position().x - lastPos.x) + Math.abs(player.position().z - lastPos.z)) / 2;
                 if(dist>20) return;
-                addExhaustion(player, (float) dist * exhaustionMultiplier);
+                if(player.isSprinting()){
+                    addExhaustion(player, (float) dist * exhaustionMultiplier);
+                }
+                else {
+                    if(CommonConfig.WALKING_CONSUME_WATER.get())
+                        addExhaustion(player, (float) dist * exhaustionMultiplier / 5);
+                }
+
             }
         }
         lastPos = player.position();
