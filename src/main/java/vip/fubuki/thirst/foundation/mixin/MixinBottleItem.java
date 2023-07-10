@@ -24,8 +24,8 @@ public class MixinBottleItem
     @Inject(method = "turnBottleIntoItem", at = @At("HEAD"))
     public void setPurity(ItemStack source, Player player, ItemStack result, CallbackInfoReturnable<ItemStack> cir)
     {
-        Level level = player.getLevel();
-        BlockPos fluidPos = MathHelper.getPlayerPOVHitResult(player.getLevel(), player, ClipContext.Fluid.SOURCE_ONLY).getBlockPos();
+        Level level = player.level();
+        BlockPos fluidPos = MathHelper.getPlayerPOVHitResult(player.level(), player, ClipContext.Fluid.SOURCE_ONLY).getBlockPos();
 
         shouldModify = level.getFluidState(fluidPos).is(FluidTags.WATER) && level.getFluidState(fluidPos).isSource();
         if(shouldModify)

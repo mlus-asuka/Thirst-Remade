@@ -5,7 +5,7 @@ import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.util.MathHelper;
 import vip.fubuki.thirst.foundation.util.ReflectionUtil;
-import net.brdle.collectorsreap.common.item.CRItems;
+//import net.brdle.collectorsreap.common.item.CRItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -44,9 +44,9 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import org.jetbrains.annotations.NotNull;
-import umpaz.brewinandchewin.common.registry.BCItems;
-import umpaz.farmersrespite.common.registry.FRItems;
-import vectorwing.farmersdelight.common.registry.ModItems;
+//import umpaz.brewinandchewin.common.registry.BCItems;
+//import umpaz.farmersrespite.common.registry.FRItems;
+//import vectorwing.farmersdelight.common.registry.ModItems;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -112,45 +112,45 @@ public class WaterPurity
 
     private static void registerFarmersDelightContainers()
     {
-        waterContainers.add(new ContainerWithPurity(new ItemStack(ModItems.MELON_JUICE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(ModItems.APPLE_CIDER.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(ModItems.MELON_JUICE.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(ModItems.APPLE_CIDER.get())));
     }
 
     private static void registerCollectorsReapContainers(){
-        waterContainers.add(new ContainerWithPurity(new ItemStack(CRItems.POMEGRANATE_BLACK_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(CRItems.LIME_GREEN_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(CRItems.POMEGRANATE_BLACK_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(CRItems.LIME_GREEN_TEA.get())));
     }
 
     private static void registerFarmersRespiteContainers()
     {
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.GREEN_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.YELLOW_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.BLACK_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.ROSE_HIP_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.DANDELION_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.COFFEE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.GAMBLERS_TEA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.PURULENT_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.GREEN_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.YELLOW_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.BLACK_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.ROSE_HIP_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.DANDELION_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.COFFEE.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.GAMBLERS_TEA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(FRItems.PURULENT_TEA.get())));
     }
 
     private static void registerBrewinAndChewinContainers()
     {
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.BEER.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.VODKA.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.MEAD.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.RICE_WINE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.EGG_GROG.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.STRONGROOT_ALE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.SACCHARINE_RUM.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.PALE_JANE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.DREAD_NOG.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.SALTY_FOLLY.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.STEEL_TOE_STOUT.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.GLITTERING_GRENADINE.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.BLOODY_MARY.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.RED_RUM.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.WITHERING_DROSS.get())));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.KOMBUCHA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.BEER.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.VODKA.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.MEAD.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.RICE_WINE.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.EGG_GROG.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.STRONGROOT_ALE.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.SACCHARINE_RUM.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.PALE_JANE.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.DREAD_NOG.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.SALTY_FOLLY.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.STEEL_TOE_STOUT.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.GLITTERING_GRENADINE.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.BLOODY_MARY.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.RED_RUM.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.WITHERING_DROSS.get())));
+//        waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.KOMBUCHA.get())));
     }
 
     private static void CustomRegister(){
@@ -191,8 +191,8 @@ public class WaterPurity
             if(canHarvestRunningWater(item))
             {
                 Player player = event.getEntity();
-                Level level = player.getLevel();
-                BlockPos blockPos = MathHelper.getPlayerPOVHitResult(player.getLevel(), player, ClipContext.Fluid.ANY).getBlockPos();
+                Level level = player.level();
+                BlockPos blockPos = MathHelper.getPlayerPOVHitResult(level, player, ClipContext.Fluid.ANY).getBlockPos();
 
                 if(level.getFluidState(blockPos).is(FluidTags.WATER))
                 {
@@ -287,11 +287,11 @@ public class WaterPurity
         if(!item.getOrCreateTag().contains("Purity")) {
             item.getOrCreateTag().putInt("Purity", -1);
             if (FarmersDelightLoaded) {
-                if (item.is(ModItems.MELON_JUICE.get()) || item.is(ModItems.APPLE_CIDER.get())){
+//                if (item.is(ModItems.MELON_JUICE.get()) || item.is(ModItems.APPLE_CIDER.get())){
                     assert item.getTag() != null;
                     if(Objects.requireNonNull(item.getTag().get("Purity")).getAsString().equals("-1"))
                         item.getTag().putInt("Purity", 3);
-                }
+//                }
 
             }
         }
@@ -320,7 +320,7 @@ public class WaterPurity
                 purity == 1 ? "slightly_dirty" :
                         purity == 2 ? "acceptable" : "purified";
 
-        return MutableComponent.create(new TranslatableContents("thirst.purity." + purityText)).getString();
+        return MutableComponent.create(new TranslatableContents("thirst.purity." + purityText,purityText,TranslatableContents.NO_ARGS)).getString();
     }
 
     /**

@@ -40,7 +40,7 @@ public class MixinOpenEndedPipe
 
                 return drainBlock;
             }*/
-            if (!waterlog && !state.getMaterial().isReplaceable())
+            if (!waterlog && !state.canBeReplaced())
             {
                 return;
             }

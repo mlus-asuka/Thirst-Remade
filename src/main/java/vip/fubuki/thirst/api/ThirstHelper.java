@@ -4,7 +4,7 @@ import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.config.ItemSettingsConfig;
 import vip.fubuki.thirst.foundation.util.ConfigHelper;
 import vip.fubuki.thirst.foundation.util.LoadedValue;
-import dev.momostudios.coldsweat.api.util.Temperature;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -104,7 +104,7 @@ public class ThirstHelper
     public static float getExhaustionBiomeModifier(Player player)
     {
         BlockPos pos = player.getOnPos();
-        Level level = player.getLevel();
+        Level level = player.level();
 
         if(level.dimensionType().ultraWarm())
             return 3.0f;
@@ -113,7 +113,7 @@ public class ThirstHelper
             Biome biome = level.getBiome(pos).value();
 
             //humidity range: 0 - 0.8 == 0.8 midpoint: 0.4
-            float humidity = biome.getDownfall() + 0.6f;
+            float humidity = biome.getModifiedClimateSettings().downfall() + 0.6f;
             if(humidity <= 0.6)
                 humidity += 0.5;
 
@@ -121,7 +121,8 @@ public class ThirstHelper
             float temp = biome.getBaseTemperature() + 0.2f;
 
             if(useColdSweatCaps)
-                temp = (float) (Temperature.get(player, Temperature.Type.BODY) / 100f);
+                {}
+//                temp = (float) (Temperature.get(player, Temperature.Type.BODY) / 100f);
             else
             {
                 if(temp <= 0)

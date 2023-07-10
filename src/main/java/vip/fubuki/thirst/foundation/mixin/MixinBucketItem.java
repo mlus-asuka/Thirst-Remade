@@ -27,7 +27,7 @@ public class MixinBucketItem
     @Inject(method = "use", at = @At("HEAD"))
     public void setPurity(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir)
     {
-        BlockPos blockPos = MathHelper.getPlayerPOVHitResult(player.getLevel(), player, ClipContext.Fluid.SOURCE_ONLY).getBlockPos();
+        BlockPos blockPos = MathHelper.getPlayerPOVHitResult(player.level(), player, ClipContext.Fluid.SOURCE_ONLY).getBlockPos();
 
         shouldModify = (level.getFluidState(blockPos).is(FluidTags.WATER) && level.getFluidState(blockPos).isSource());
 

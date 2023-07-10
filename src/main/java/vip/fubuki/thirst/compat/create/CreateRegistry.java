@@ -16,10 +16,6 @@ public class CreateRegistry
 
     public static void register(){}
 
-    static
-    {
-        REGISTRATE.get().creativeModeTab(() -> ThirstTab.THIRST_TAB);
-    }
 
     public static final BlockEntry<SandFilterBlock> SAND_FILTER_BLOCK= REGISTRATE.get()
             .block("sand_filter", SandFilterBlock::new)

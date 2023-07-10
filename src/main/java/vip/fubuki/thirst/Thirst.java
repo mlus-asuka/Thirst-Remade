@@ -25,12 +25,15 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import vip.fubuki.thirst.foundation.tab.ThirstTab;
 
 @Mod(Thirst.ID)
 public class Thirst
 {
     public static final String ID = "thirst";
     public static final NonNullSupplier<Registrate> REGISTRATE=NonNullSupplier.lazy(() ->Registrate.create(Thirst.ID));
+
+    public static boolean CreateLoaded;
 
     public Thirst()
     {
@@ -47,6 +50,7 @@ public class Thirst
         if(ModList.get().isLoaded("create"))
         {
             CreateRegistry.register();
+            CreateLoaded = true;
         }
         if(ModList.get().isLoaded("appleskin") && FMLEnvironment.dist.isClient())
         {
@@ -54,6 +58,8 @@ public class Thirst
             TooltipOverlayHandler.init();
             modBus.addListener(this::onRegisterClientTooltipComponentFactories);
         }
+
+        ThirstTab.register(modBus);
 
         //configs
         ItemSettingsConfig.setup();

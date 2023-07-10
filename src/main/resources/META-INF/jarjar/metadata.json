@@ -6,10 +6,10 @@
         "artifact": "Registrate"
       },
       "version": {
-        "range": "[MC1.19-1.1.5,)",
-        "artifactVersion": "MC1.19-1.1.5"
+        "range": "[MC1.20-1.3.3,)",
+        "artifactVersion": "MC1.20-1.3.3"
       },
-      "path": "META-INF/jarjar/Registrate-MC1.19-1.1.5.jar",
+      "path": "META-INF/jarjar/Registrate-MC1.20-1.3.3.jar",
       "isObfuscated": false
     }
   ]

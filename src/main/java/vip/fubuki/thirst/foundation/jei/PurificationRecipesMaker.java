@@ -1,5 +1,6 @@
 package vip.fubuki.thirst.foundation.jei;
 
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import vip.fubuki.thirst.Thirst;
 import vip.fubuki.thirst.content.purity.WaterPurity;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
@@ -27,6 +28,7 @@ public class PurificationRecipesMaker
             recipes.add(new CampfireCookingRecipe(
                     Thirst.asResource("bottle_purification"),
                     "",
+                    CookingBookCategory.FOOD,
                     Ingredient.of(WaterPurity.addPurity(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER), i)),
                     WaterPurity.addPurity(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER), Math.min(i + CommonConfig.CAMPFIRE_PURIFICATION_LEVELS.get().intValue(), WaterPurity.MAX_PURITY)),
                     0.35f,
@@ -35,6 +37,7 @@ public class PurificationRecipesMaker
             recipes.add(new CampfireCookingRecipe(
                     Thirst.asResource("bucket_purification"),
                     "",
+                    CookingBookCategory.MISC,
                     Ingredient.of(WaterPurity.addPurity(new ItemStack(Items.WATER_BUCKET), i)),
                     WaterPurity.addPurity(new ItemStack(Items.WATER_BUCKET), Math.min(i + CommonConfig.CAMPFIRE_PURIFICATION_LEVELS.get().intValue(), WaterPurity.MAX_PURITY)),
                     0.35f,
@@ -54,6 +57,7 @@ public class PurificationRecipesMaker
             recipes.add(new SmeltingRecipe(
                     Thirst.asResource("bottle_purification"),
                     "",
+                    CookingBookCategory.FOOD,
                     Ingredient.of(WaterPurity.addPurity(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER), i)),
                     WaterPurity.addPurity(PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER), Math.min(i + CommonConfig.FURNACE_PURIFICATION_LEVELS.get().intValue(), WaterPurity.MAX_PURITY)),
                     0.35f,
@@ -62,6 +66,7 @@ public class PurificationRecipesMaker
             recipes.add(new SmeltingRecipe(
                     Thirst.asResource("bucket_purification"),
                     "",
+                    CookingBookCategory.MISC,
                     Ingredient.of(WaterPurity.addPurity(new ItemStack(Items.WATER_BUCKET), i)),
                     WaterPurity.addPurity(new ItemStack(Items.WATER_BUCKET), Math.min(i + CommonConfig.FURNACE_PURIFICATION_LEVELS.get().intValue(), WaterPurity.MAX_PURITY)),
                     0.35f,

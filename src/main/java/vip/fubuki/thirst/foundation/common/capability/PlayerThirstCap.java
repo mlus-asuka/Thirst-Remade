@@ -14,7 +14,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
-import vectorwing.farmersdelight.common.registry.ModEffects;
+//import vectorwing.farmersdelight.common.registry.ModEffects;
 
 public class PlayerThirstCap implements IThirstCap
 {
@@ -75,11 +75,11 @@ public class PlayerThirstCap implements IThirstCap
     public void tick(Player player)
     {
 
-        Difficulty difficulty = player.level.getDifficulty();
+        Difficulty difficulty = player.level().getDifficulty();
         if (player.isInvulnerable()) return;
-        if (!ModList.get().isLoaded("farmersdelight") || !player.hasEffect(ModEffects.NOURISHMENT.get())) {
-                updateExhaustion(player);
-        }
+//        if (!ModList.get().isLoaded("farmersdelight") || !player.hasEffect(ModEffects.NOURISHMENT.get())) {
+        updateExhaustion(player);
+//        }
 
         if (exhaustion > 4)
         {
@@ -94,10 +94,10 @@ public class PlayerThirstCap implements IThirstCap
             }
         }
 
-        boolean flag = player.level.getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
+        boolean flag = player.level().getGameRules().getBoolean(GameRules.RULE_NATURAL_REGENERATION);
 
         ++syncTimer;
-        if(syncTimer > 10 && !player.getLevel().isClientSide())
+        if(syncTimer > 10 && !player.level().isClientSide())
         {
             updateThirstData(player);
             syncTimer = 0;
@@ -149,7 +149,7 @@ public class PlayerThirstCap implements IThirstCap
                         + Math.abs(player.position().z - lastPos.z)) / 3;
                 addExhaustion(player, (float) dist * exhaustionMultiplier);
             }
-            else if (player.isOnGround() && player.isSprinting())
+            else if (player.onGround() && player.isSprinting())
             {
                 double dist = (Math.abs(player.position().x - lastPos.x) + Math.abs(player.position().z - lastPos.z)) / 2;
                 if(dist>20) return;

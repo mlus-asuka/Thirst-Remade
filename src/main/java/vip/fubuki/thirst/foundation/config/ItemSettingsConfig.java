@@ -36,6 +36,7 @@ public class ItemSettingsConfig
                                         Arrays.asList("farmersrespite:black_tea", 10, 14),
                                         Arrays.asList("farmersrespite:rose_hip_tea", 12, 22),
                                         Arrays.asList("farmersrespite:dandelion_tea", 12, 22),
+                                        Arrays.asList("farmersrespite:coffee",6,11),
                                         Arrays.asList("create:builders_tea", 12, 22),
                                         Arrays.asList("farmersdelight:apple_cider", 8, 13),
                                         Arrays.asList("farmersdelight:melon_juice", 8, 13),

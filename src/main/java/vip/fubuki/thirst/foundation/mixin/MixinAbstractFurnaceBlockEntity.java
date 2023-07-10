@@ -1,5 +1,6 @@
 package vip.fubuki.thirst.foundation.mixin;
 
+import net.minecraft.core.RegistryAccess;
 import vip.fubuki.thirst.content.purity.WaterPurity;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import net.minecraft.core.NonNullList;
@@ -19,10 +20,10 @@ import javax.annotation.Nullable;
 public abstract class MixinAbstractFurnaceBlockEntity
 {
     @Shadow
-    protected abstract boolean canBurn(@Nullable Recipe<?> p_155006_, NonNullList<ItemStack> p_155007_, int p_155008_);
+    protected abstract boolean canBurn(RegistryAccess registryAccess,@Nullable Recipe<?> p_155006_, NonNullList<ItemStack> p_155007_, int p_155008_);
 
     @Inject(method = "canBurn", at = @At("HEAD"), cancellable = true)
-    private void blockPotions(Recipe<?> p_155006_, NonNullList<ItemStack> item, int p_155008_, CallbackInfoReturnable<Boolean> cir)
+    private void blockPotions(RegistryAccess p_266924_, Recipe<?> p_155006_, NonNullList<ItemStack> item, int p_155008_, CallbackInfoReturnable<Boolean> cir)
     {
         if(WaterPurity.isWaterFilledContainer(item.get(0)))
         {
@@ -34,12 +35,12 @@ public abstract class MixinAbstractFurnaceBlockEntity
     }
 
     @Inject(method = "burn", at = @At("HEAD"), cancellable = true)
-    private void burnPurityContainers(Recipe<?> p_155027_, NonNullList<ItemStack> p_155028_, int p_155029_, CallbackInfoReturnable<Boolean> cir)
+    private void burnPurityContainers(RegistryAccess registryAccess, Recipe<?> recipe, NonNullList<ItemStack> item, int p_267157_, CallbackInfoReturnable<Boolean> cir)
     {
-        if (p_155027_ != null && this.canBurn(p_155027_, p_155028_, p_155029_))
+        if (recipe != null && this.canBurn(registryAccess,recipe, item, p_267157_))
         {
-            ItemStack itemstack = p_155028_.get(0);
-            ItemStack itemstack2 = p_155028_.get(2);
+            ItemStack itemstack = item.get(0);
+            ItemStack itemstack2 = item.get(2);
 
             if(WaterPurity.isWaterFilledContainer(itemstack))
             {
@@ -49,7 +50,7 @@ public abstract class MixinAbstractFurnaceBlockEntity
 
                 if (itemstack2.isEmpty())
                 {
-                    p_155028_.set(2, itemstack1.copy());
+                    item.set(2, itemstack1.copy());
                 }
                 else if (itemstack2.is(itemstack1.getItem()))
                 {

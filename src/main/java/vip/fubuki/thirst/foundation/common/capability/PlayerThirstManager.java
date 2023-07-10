@@ -76,14 +76,14 @@ public class PlayerThirstManager
     @SubscribeEvent
     public static void drinkByHand(PlayerInteractEvent.RightClickBlock event)
     {
-        if(CommonConfig.CAN_DRINK_BY_HAND.get() && event.getEntity().level.isClientSide)
+        if(CommonConfig.CAN_DRINK_BY_HAND.get() && event.getEntity().level().isClientSide)
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DrinkByHandClient::drinkByHand);
     }
 
     @SubscribeEvent
     public static void drinkByHand(PlayerInteractEvent.RightClickEmpty event)
     {
-        if(CommonConfig.CAN_DRINK_BY_HAND.get() && event.getEntity().level.isClientSide)
+        if(CommonConfig.CAN_DRINK_BY_HAND.get() && event.getEntity().level().isClientSide)
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> DrinkByHandClient::drinkByHand);
     }
 
@@ -143,7 +143,7 @@ public class PlayerThirstManager
     @SubscribeEvent
     public static void endFix(PlayerEvent.Clone event)
     {
-        if (!event.isWasDeath() && !event.getEntity().level.isClientSide)
+        if (!event.isWasDeath() && !event.getEntity().level().isClientSide)
         {
             Player oldPlayer = event.getOriginal();
             oldPlayer.reviveCaps();
