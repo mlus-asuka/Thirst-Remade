@@ -13,10 +13,8 @@ import static vip.fubuki.thirst.Thirst.REGISTRATE;
 
 public class CreateRegistry
 {
-    public CreateRegistry(){}
+
     public static void register(){}
-
-
 
     static
     {

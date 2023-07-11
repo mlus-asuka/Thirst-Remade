@@ -4,9 +4,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -60,7 +57,7 @@ public abstract class MixinStoveBlockEntity extends SyncedBlockEntity {
                         if (recipe.isPresent()) {
                             ItemStack resultStack = recipe.get().getResultItem();
 
-                            if(stoveStack.getItem() == Items.POTION && PotionUtils.getPotion(stoveStack)== Potions.WATER){
+                            if(WaterPurity.isWaterFilledContainer(stoveStack)) {
                                 resultStack= WaterPurity.addPurity(stoveStack, Math.min(WaterPurity.getPurity(stoveStack) + CommonConfig.CAMPFIRE_PURIFICATION_LEVELS.get().intValue() , WaterPurity.MAX_PURITY));
                             }
 

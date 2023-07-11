@@ -5,9 +5,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.CampfireCookingRecipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,7 +51,7 @@ public abstract class MixinSkilletBlockEntity extends SyncedBlockEntity {
                 if (recipe.isPresent()) {
                     ItemStack resultStack = recipe.get().assemble(wrapper);
 
-                    if(cookingStack.getItem()== Items.POTION && PotionUtils.getPotion(cookingStack)== Potions.WATER){
+                    if(WaterPurity.isWaterFilledContainer(cookingStack)) {
                         resultStack = WaterPurity.addPurity(cookingStack.copy(), Math.min(WaterPurity.getPurity(cookingStack) + CommonConfig.CAMPFIRE_PURIFICATION_LEVELS.get().intValue() , WaterPurity.MAX_PURITY));
                         resultStack.setCount(1);
                     }
@@ -76,4 +73,3 @@ public abstract class MixinSkilletBlockEntity extends SyncedBlockEntity {
     @Shadow
     protected abstract Optional<CampfireCookingRecipe> getMatchingRecipe(Container recipeWrapper);
 }
-

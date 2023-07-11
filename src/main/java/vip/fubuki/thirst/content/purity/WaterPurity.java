@@ -3,7 +3,7 @@ package vip.fubuki.thirst.content.purity;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import vip.fubuki.thirst.api.ThirstHelper;
-import vip.fubuki.thirst.content.registry.ItemInit;
+import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.util.MathHelper;
 import vip.fubuki.thirst.foundation.util.ReflectionUtil;
@@ -73,6 +73,8 @@ public class WaterPurity
     public static final IntegerProperty BLOCK_PURITY = IntegerProperty.create("purity", 0, 4);
     public static boolean FarmersDelightLoaded = false;
 
+    public static boolean FarmersRespiteLoaded = false;
+
     public static void init()
     {
         registerDispenserBehaviours();
@@ -86,6 +88,7 @@ public class WaterPurity
         if(ModList.get().isLoaded("farmersrespite"))
         {
             registerFarmersRespiteContainers();
+            FarmersRespiteLoaded=true;
         }
 
         if(ModList.get().isLoaded("brewinandchewin")) {
@@ -98,8 +101,8 @@ public class WaterPurity
         waterContainers.add(new ContainerWithPurity(new ItemStack(Items.GLASS_BOTTLE),
                 PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER)).setEqualsFilled(itemStack ->
                 itemStack.is(Items.POTION) && PotionUtils.getPotion(itemStack) == Potions.WATER));
-        waterContainers.add(new ContainerWithPurity(new ItemStack(ItemInit.TERRACOTTA_BOWL.get()),
-                new ItemStack(ItemInit.TERRACOTTA_WATER_BOWL.get())));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(ThirstItem.TERRACOTTA_BOWL.get()),
+                new ItemStack(ThirstItem.TERRACOTTA_WATER_BOWL.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(Items.BUCKET),
                 new ItemStack(Items.WATER_BUCKET), false).canHarvestRunningWater(false));
     }
@@ -192,10 +195,10 @@ public class WaterPurity
                         sound = SoundEvents.BOTTLE_FILL;
                         filledItem = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
                     }
-                    else if(item.getItem() == ItemInit.TERRACOTTA_BOWL.get())
+                    else if(item.getItem() == ThirstItem.TERRACOTTA_BOWL.get())
                     {
                         sound = SoundEvents.BUCKET_FILL;
-                        filledItem = new ItemStack(ItemInit.TERRACOTTA_WATER_BOWL.get());
+                        filledItem = new ItemStack(ThirstItem.TERRACOTTA_WATER_BOWL.get());
                     }
                     else
                         return;

@@ -4,8 +4,9 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import vip.fubuki.thirst.api.ThirstHelper;
 import vip.fubuki.thirst.compat.create.CreateRegistry;
+import vip.fubuki.thirst.compat.create.ponder.ThirstPonders;
 import vip.fubuki.thirst.content.purity.WaterPurity;
-import vip.fubuki.thirst.content.registry.ItemInit;
+import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.common.capability.IThirstCap;
 import vip.fubuki.thirst.foundation.config.ClientConfig;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
@@ -36,19 +37,14 @@ public class Thirst
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modBus.addListener(this::commonSetup);
+        modBus.addListener(this::clientSetup);
         modBus.addListener(this::registerCapabilities);
-        ThirstBarRenderer.register();
 
-        ItemInit.ITEMS.register(modBus);
+        ThirstItem.register();
 
         if(ModList.get().isLoaded("create"))
         {
             CreateRegistry.register();
-        }
-        if(ModList.get().isLoaded("appleskin") && FMLEnvironment.dist.isClient())
-        {
-            HUDOverlayHandler.init();
-            TooltipOverlayHandler.init();
         }
 
         //configs
@@ -64,6 +60,19 @@ public class Thirst
 
         if(ModList.get().isLoaded("coldsweat"))
             ThirstHelper.shouldUseColdSweatCaps(true);
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event)
+    {
+        if(ModList.get().isLoaded("create")){
+            event.enqueueWork(ThirstPonders::register);
+        }
+        if(ModList.get().isLoaded("appleskin") && FMLEnvironment.dist.isClient())
+        {
+            HUDOverlayHandler.init();
+            TooltipOverlayHandler.init();
+        }
+        ThirstBarRenderer.register();
     }
 
     public void registerCapabilities(RegisterCapabilitiesEvent event)

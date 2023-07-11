@@ -4,7 +4,12 @@
   {
     "item": "minecraft:potion"
   },
-  "result": "minecraft:potion",
+  "result": {
+    "item":"minecraft:potion",
+    "nbt": {
+      "Potion": "minecraft:water"
+    }
+  },
   "experience": 0.35,
   "cookingtime": 300
 }
