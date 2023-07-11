@@ -1,10 +1,8 @@
 package vip.fubuki.thirst.compat.create.ponder;
 
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
-import com.simibubi.create.foundation.ponder.PonderStoryBoardEntry;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import com.simibubi.create.infrastructure.ponder.AllPonderTags;
-import plus.dragons.createcentralkitchen.foundation.ponder.PonderEntry;
 import vip.fubuki.thirst.Thirst;
 import vip.fubuki.thirst.compat.create.CreateRegistry;
 import vip.fubuki.thirst.compat.create.ponder.scene.SandFilterScene;
