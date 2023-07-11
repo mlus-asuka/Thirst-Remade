@@ -1,10 +1,5 @@
 package vip.fubuki.thirst.content.purity;
 
-import vip.fubuki.thirst.api.ThirstHelper;
-import vip.fubuki.thirst.content.registry.ThirstItem;
-import vip.fubuki.thirst.foundation.config.CommonConfig;
-import vip.fubuki.thirst.foundation.util.MathHelper;
-import vip.fubuki.thirst.foundation.util.ReflectionUtil;
 import net.brdle.collectorsreap.common.item.CRItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
@@ -47,6 +42,11 @@ import org.jetbrains.annotations.NotNull;
 import umpaz.brewinandchewin.common.registry.BCItems;
 import umpaz.farmersrespite.common.registry.FRItems;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vip.fubuki.thirst.api.ThirstHelper;
+import vip.fubuki.thirst.content.registry.ThirstItem;
+import vip.fubuki.thirst.foundation.config.CommonConfig;
+import vip.fubuki.thirst.foundation.util.MathHelper;
+import vip.fubuki.thirst.foundation.util.ReflectionUtil;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

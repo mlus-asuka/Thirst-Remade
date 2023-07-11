@@ -23,6 +23,7 @@ import vectorwing.farmersdelight.common.block.entity.SkilletBlockEntity;
 import vectorwing.farmersdelight.common.block.entity.SyncedBlockEntity;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vip.fubuki.thirst.content.purity.WaterPurity;
+import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 
 import java.util.Optional;
@@ -54,7 +55,7 @@ public abstract class MixinSkilletBlockEntity extends SyncedBlockEntity {
                 if (recipe.isPresent()) {
                     ItemStack resultStack = recipe.get().assemble(wrapper);
 
-                    if(cookingStack.getItem()== Items.POTION && PotionUtils.getPotion(cookingStack)== Potions.WATER){
+                    if(WaterPurity.isWaterFilledContainer(cookingStack)) {
                         resultStack = WaterPurity.addPurity(cookingStack.copy(), Math.min(WaterPurity.getPurity(cookingStack) + CommonConfig.CAMPFIRE_PURIFICATION_LEVELS.get().intValue() , WaterPurity.MAX_PURITY));
                         resultStack.setCount(1);
                     }

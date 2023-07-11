@@ -24,6 +24,7 @@
     "create.MixinOpenEndedPipe",
     "createcenterkitchen.MixinKettlePoint",
     "farmersdelight.MixinSkilletBlockEntity",
+    "farmersdelight.MixinSkilletItem",
     "farmersdelight.MixinStoveBlockEntity",
     "farmersrespite.MixinKettleBlock",
     "farmersrespite.MixinKettleBlockEntity"
