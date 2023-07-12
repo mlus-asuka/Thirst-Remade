@@ -13,7 +13,6 @@
     "accessors.farmersdelight.SyncedBlockEntityAccessor",
     "accessors.farmersrespite.KettleBlockEntityAccessor",
     "brewinandchewin.MixinKegBlockEntity",
-    "create.MixinFanProcessing",
     "create.MixinFillingBySpout",
     "create.MixinFluidDrainingBehaviour",
     "create.MixinGenericItemEmptying",
@@ -21,7 +20,10 @@
     "create.MixinOpenEndedPipe",
     "createcenterkitchen.MixinKettlePoint",
     "farmersrespite.MixinKettleBlock",
-    "farmersrespite.MixinKettleBlockEntity"
+    "farmersrespite.MixinKettleBlockEntity",
+    "toughasnails.MixinEmptyCanteenItem",
+    "toughasnails.MixinThirstHandler",
+    "toughasnails.MixinThirstHelperImpl"
   ],
   "client": [
     "farmersrespite.MixinKettleScreen"

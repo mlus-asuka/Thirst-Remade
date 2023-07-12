@@ -60,7 +60,23 @@ public class ItemSettingsConfig
                                         Arrays.asList("collectorsreap:limeade",8,13),
                                         Arrays.asList("collectorsreap:pink_limeade",8,13),
                                         Arrays.asList("collectorsreap:pomegranate_black_tea",10,14),
-                                        Arrays.asList("collectorsreap:lime_green_tea",10,14)
+                                        Arrays.asList("collectorsreap:lime_green_tea",10,14),
+
+                                        Arrays.asList("toughasnails:dirty_water_bottle", 6, 8),
+                                        Arrays.asList("toughasnails:purified_water_bottle", 8, 10),
+                                        Arrays.asList("toughasnails:dirty_water_canteen", 8, 10),
+                                        Arrays.asList("toughasnails:water_canteen", 9, 11),
+                                        Arrays.asList("toughasnails:purified_water_canteen", 10, 12),
+                                        Arrays.asList("toughasnails:melon_juice", 8, 13),
+                                        Arrays.asList("toughasnails:apple_juice", 8, 13),
+                                        Arrays.asList("toughasnails:cactus_juice", 8, 13),
+                                        Arrays.asList("toughasnails:carrot_juice", 8, 13),
+                                        Arrays.asList("toughasnails:glow_berry_juice", 8, 13),
+                                        Arrays.asList("toughasnails:chorus_fruit_juice", 8, 13),
+                                        Arrays.asList("toughasnails:suspicious_water_cup", 8, 13),
+                                        Arrays.asList("toughasnails:pumpkin_juice", 8, 13),
+                                        Arrays.asList("toughasnails:sweet_berry_juice", 8, 13)
+
                                 ),
                         it -> it instanceof List && ((List<?>) it).get(0) instanceof String && ((List<?>) it).get(1) instanceof Number);
 
@@ -83,6 +99,8 @@ public class ItemSettingsConfig
                                         Arrays.asList("minecraft:beetroot", 1, 2),
                                         Arrays.asList("minecraft:sweet_berries", 1, 2),
                                         Arrays.asList("minecraft:glow_berries", 1, 2),
+                                        Arrays.asList("minecraft:glistering_melon_slice",4,5),
+                                        Arrays.asList("minecraft:golden_carrot", 1, 2),
                                         Arrays.asList("farmersdelight:pumpkin_slice", 2, 1),
                                         Arrays.asList("farmersdelight:cabbage_leaf", 1, 2),
                                         Arrays.asList("farmersdelight:melon_popsicle", 7, 9),
