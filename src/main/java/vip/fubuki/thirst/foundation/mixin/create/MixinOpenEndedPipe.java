@@ -24,7 +24,6 @@ public class MixinOpenEndedPipe
     @Inject(method = "removeFluidFromSpace", at = @At("HEAD"), cancellable = true, remap = false)
     private void removeFluidFromSpace(boolean simulate, CallbackInfoReturnable<FluidStack> cir)
     {
-        FluidStack empty = FluidStack.EMPTY;
         OpenEndedPipe pipe = ((OpenEndedPipe)(Object)this);
 
         if(pipe.getWorld() != null && pipe.getWorld().isLoaded(pipe.getOutputPos()))
@@ -32,19 +31,8 @@ public class MixinOpenEndedPipe
             BlockState state = pipe.getWorld().getBlockState(pipe.getOutputPos());
             FluidState fluidState = state.getFluidState();
             boolean waterlog = state.hasProperty(BlockStateProperties.WATERLOGGED);
-            /*FluidStack drainBlock = VanillaFluidTargets.drainBlock(pipe.getWorld(), pipe.getOutputPos(), state, simulate);
-            if (!drainBlock.isEmpty()) {
-                if (!simulate && state.hasProperty(BlockStateProperties.LEVEL_HONEY) && AllFluids.HONEY.is(drainBlock.getFluid())) {
-                    AdvancementBehaviour.tryAward(this.world, this.pos, AllAdvancements.HONEY_DRAIN);
-                }
 
-                return drainBlock;
-            }*/
-            if (!waterlog && !state.canBeReplaced())
-            {
-                return;
-            }
-            else if (!fluidState.isEmpty() && fluidState.isSource())
+            if ((!fluidState.isEmpty() && fluidState.isSource())&&(waterlog || state.canBeReplaced()))
             {
                 FluidStack stack = new FluidStack(fluidState.getType(), 1000);
                 if(FluidHelper.isWater(stack.getFluid()))

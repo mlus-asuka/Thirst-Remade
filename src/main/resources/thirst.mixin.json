@@ -4,20 +4,20 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "thirst.refmap.json",
   "mixins": [
-    "MixinAbstractFurnaceBlockEntity",
     "MixinBottleItem",
     "MixinBucketItem",
-    "MixinCampfireBlockEntity",
     "MixinItemStack",
     "MixinLayeredCauldronBlock",
-    "accessors.CampfireBlockEntityAccessor",
     "accessors.create.IFluidDrainingBehaviourAccessor",
-    "create.MixinFanProcessing",
     "create.MixinFillingBySpout",
     "create.MixinFluidDrainingBehaviour",
     "create.MixinGenericItemEmptying",
     "create.MixinGenericItemFilling",
-    "create.MixinOpenEndedPipe"
+    "create.MixinOpenEndedPipe",
+    "toughasnails.MixinEmptyCanteenItem",
+    "toughasnails.MixinThirstHandler",
+    "toughasnails.MixinThirstHelperImpl",
+    "toughasnails.MixinTooltipHandler"
   ],
   "client": [
   ],

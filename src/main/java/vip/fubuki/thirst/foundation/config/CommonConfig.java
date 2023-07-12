@@ -33,9 +33,6 @@ public class CommonConfig
     public static final ForgeConfigSpec.ConfigValue<Number> ACCEPTABLE_NAUSEA_PERCENTAGE;
     public static final ForgeConfigSpec.ConfigValue<Number> PURIFIED_POISON_PERCENTAGE;
     public static final ForgeConfigSpec.ConfigValue<Number> PURIFIED_NAUSEA_PERCENTAGE;
-
-    public static final ForgeConfigSpec.ConfigValue<Number> CAMPFIRE_PURIFICATION_LEVELS;
-    public static final ForgeConfigSpec.ConfigValue<Number> FURNACE_PURIFICATION_LEVELS;
     public static final ForgeConfigSpec.ConfigValue<Number> KETTLE_PURIFICATION_LEVELS;
 
     public static final ForgeConfigSpec.ConfigValue<Number> FERMENTATION_MOLDING_THRESHOLD;
@@ -73,8 +70,6 @@ public class CommonConfig
         BUILDER.pop();
 
         BUILDER.push("Purification levels");
-        CAMPFIRE_PURIFICATION_LEVELS = BUILDER.comment("How many levels of purification are added after purifying on a campfire").define("campfirePurificationLevels", 1);
-        FURNACE_PURIFICATION_LEVELS = BUILDER.comment("How many levels of purification are added after purifying in a furnace").define("furnacePurificationLevels", 2);
         KETTLE_PURIFICATION_LEVELS = BUILDER.comment("How many levels of purification are added after boiling in a kettle").define("furnacePurificationLevels", 2);
         BUILDER.pop();
 
