@@ -74,9 +74,9 @@ public class PlayerThirstCap implements IThirstCap
     */
     public void tick(Player player)
     {
+        if (player.isInvulnerable()) return;
 
         Difficulty difficulty = player.level.getDifficulty();
-        if (player.isInvulnerable()) return;
         if (!ModList.get().isLoaded("farmersdelight") || !player.hasEffect(ModEffects.NOURISHMENT.get())) {
                 updateExhaustion(player);
         }

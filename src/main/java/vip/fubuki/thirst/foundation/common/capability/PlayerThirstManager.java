@@ -1,10 +1,5 @@
 package vip.fubuki.thirst.foundation.common.capability;
 
-import vip.fubuki.thirst.Thirst;
-import vip.fubuki.thirst.api.ThirstHelper;
-import vip.fubuki.thirst.content.purity.WaterPurity;
-import vip.fubuki.thirst.content.thirst.DrinkByHandClient;
-import vip.fubuki.thirst.foundation.config.CommonConfig;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -26,6 +21,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import vip.fubuki.thirst.Thirst;
+import vip.fubuki.thirst.api.ThirstHelper;
+import vip.fubuki.thirst.content.purity.WaterPurity;
+import vip.fubuki.thirst.content.thirst.DrinkByHandClient;
+import vip.fubuki.thirst.foundation.config.CommonConfig;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -104,35 +104,30 @@ public class PlayerThirstManager
     @SubscribeEvent
     public static void onPlayerJump(LivingEvent.LivingJumpEvent  event)
     {
-        if(event.getEntity() instanceof ServerPlayer)
+        if(event.getEntity() instanceof ServerPlayer serverPlayer)
         {
-            event.getEntity().getCapability(ModCapabilities.PLAYER_THIRST).ifPresent(cap ->
-            {
-                Player player = (Player) event.getEntity();
-                cap.addExhaustion(player, 0.05f + (player.isSprinting() ? 0.175f : 0f));
-            });
+            if(serverPlayer.isInvulnerable()) return;
+            serverPlayer.getCapability(ModCapabilities.PLAYER_THIRST).ifPresent(cap ->
+                    cap.addExhaustion(serverPlayer, 0.05f + (serverPlayer.isSprinting() ? 0.175f : 0f)));
         }
     }
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event)
     {
-        if (event.phase == TickEvent.Phase.START && event.player instanceof ServerPlayer)
+        if (event.phase == TickEvent.Phase.START && event.player instanceof ServerPlayer serverPlayer)
         {
-            event.player.getCapability(ModCapabilities.PLAYER_THIRST).ifPresent(cap -> cap.tick(event.player));
+            serverPlayer.getCapability(ModCapabilities.PLAYER_THIRST).ifPresent(cap -> cap.tick(serverPlayer));
         }
     }
 
     @SubscribeEvent
     public static void onPlayerBreak(LivingDestroyBlockEvent event)
     {
-        if(event.getEntity() instanceof ServerPlayer)
+        if(event.getEntity() instanceof ServerPlayer serverPlayer)
         {
             event.getEntity().getCapability(ModCapabilities.PLAYER_THIRST).ifPresent(cap ->
-            {
-                Player player = (Player) event.getEntity();
-                cap.addExhaustion(player, 0.005f);
-            });
+                    cap.addExhaustion(serverPlayer, 0.005f));
         }
     }
 
