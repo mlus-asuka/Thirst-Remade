@@ -1,5 +1,6 @@
 package vip.fubuki.thirst.content.purity;
 
+import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import vip.fubuki.thirst.api.ThirstHelper;
@@ -493,13 +494,13 @@ public class WaterPurity
 
     static void registerDispenserBehaviours()
     {
-        //fuck you mappings (the default is getDispenseMethod)
+        //mappings (the default is getDispenseMethod)
         Method getDispenseMethod = ObfuscationReflectionHelper.findMethod(DispenserBlock.class, "m_7216_", ItemStack.class);
 
-        DefaultDispenseItemBehavior bucketDefaultBehaviour = (DefaultDispenseItemBehavior) ReflectionUtil.fuckYouReflections(getDispenseMethod, Blocks.DISPENSER, new ItemStack(Items.BUCKET));
-        OptionalDispenseItemBehavior bottleDefaultBehaviour = (OptionalDispenseItemBehavior) ReflectionUtil.fuckYouReflections(getDispenseMethod, Blocks.DISPENSER, new ItemStack(Items.GLASS_BOTTLE.asItem()));
+        DispenseItemBehavior bucketDefaultBehaviour = (DispenseItemBehavior) ReflectionUtil.MethodReflection(getDispenseMethod, Blocks.DISPENSER, new ItemStack(Items.BUCKET));
+        OptionalDispenseItemBehavior bottleDefaultBehaviour = (OptionalDispenseItemBehavior) ReflectionUtil.MethodReflection(getDispenseMethod, Blocks.DISPENSER, new ItemStack(Items.GLASS_BOTTLE.asItem()));
 
-        //fuck you mappings (part 2) (the default is execute)
+        //mappings (the default is execute)
         Method execute = ObfuscationReflectionHelper.findMethod(DefaultDispenseItemBehavior.class, "m_7498_", BlockSource.class, ItemStack.class);
 
         DispenserBlock.registerBehavior(Items.BUCKET, (BlockSource block, ItemStack item) ->
@@ -509,12 +510,12 @@ public class WaterPurity
 
             if(level.getBlockState(blockpos).is(Blocks.WATER) && level.getBlockState(blockpos).getFluidState().isSource())
             {
+                ItemStack result =addPurity(new ItemStack(Items.WATER_BUCKET),getBlockPurity(level.getBlockState(blockpos)));
                 ((BucketPickup)level.getBlockState(blockpos).getBlock()).pickupBlock(level, blockpos, level.getBlockState(blockpos));
-                ItemStack result = new ItemStack(Items.WATER_BUCKET);
-                return getStack(block, item, level, blockpos, result);
+                return getStack(block, item, level, blockpos,result);
             }
             else
-                return (ItemStack) ReflectionUtil.fuckYouReflections(execute, bucketDefaultBehaviour, block, item);
+                return (ItemStack) ReflectionUtil.MethodReflection(execute, bucketDefaultBehaviour, block, item);
 
         });
 
@@ -526,10 +527,10 @@ public class WaterPurity
             if(level.getFluidState(blockpos).is(FluidTags.WATER))
             {
                 ItemStack result = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
-                return getStack(block, item, level, blockpos, result);
+                return getStack(block, item, level, blockpos, addPurity(result,getBlockPurity(level.getBlockState(blockpos))));
             }
             else
-                return (ItemStack) ReflectionUtil.fuckYouReflections(execute, bottleDefaultBehaviour, block, item);
+                return (ItemStack) ReflectionUtil.MethodReflection(execute, bottleDefaultBehaviour, block, item);
         });
     }
 
