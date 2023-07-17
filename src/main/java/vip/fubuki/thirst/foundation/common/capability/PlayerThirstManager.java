@@ -106,7 +106,6 @@ public class PlayerThirstManager
     {
         if(event.getEntity() instanceof ServerPlayer serverPlayer)
         {
-            if(serverPlayer.isInvulnerable()) return;
             serverPlayer.getCapability(ModCapabilities.PLAYER_THIRST).ifPresent(cap ->
                     cap.addExhaustion(serverPlayer, 0.05f + (serverPlayer.isSprinting() ? 0.175f : 0f)));
         }

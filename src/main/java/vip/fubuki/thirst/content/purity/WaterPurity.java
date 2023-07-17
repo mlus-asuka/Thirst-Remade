@@ -3,6 +3,7 @@ package vip.fubuki.thirst.content.purity;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import toughasnails.api.item.TANItems;
 import vip.fubuki.thirst.api.ThirstHelper;
 import vip.fubuki.thirst.content.registry.ThirstItem;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
@@ -74,7 +75,7 @@ public class WaterPurity
     public static final IntegerProperty BLOCK_PURITY = IntegerProperty.create("purity", 0, 4);
     public static boolean FarmersDelightLoaded = false;
 
-    public static boolean FarmersRespiteLoaded = false;
+    public static boolean TANLoaded=false;
 
     public static void init()
     {
@@ -89,11 +90,15 @@ public class WaterPurity
         if(ModList.get().isLoaded("farmersrespite"))
         {
             registerFarmersRespiteContainers();
-            FarmersRespiteLoaded=true;
         }
 
         if(ModList.get().isLoaded("brewinandchewin")) {
             registerBrewinAndChewinContainers();
+        }
+
+        if(ModList.get().isLoaded("toughasnails")){
+            registerToughAsNailsContainers();
+            TANLoaded=true;
         }
     }
 
@@ -143,6 +148,22 @@ public class WaterPurity
         waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.RED_RUM.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.WITHERING_DROSS.get())));
         waterContainers.add(new ContainerWithPurity(new ItemStack(BCItems.KOMBUCHA.get())));
+    }
+
+    private static void registerToughAsNailsContainers()
+    {
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.PURIFIED_WATER_CANTEEN)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.DIRTY_WATER_CANTEEN)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.WATER_CANTEEN)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.PURIFIED_WATER_BOTTLE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.DIRTY_WATER_BOTTLE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.APPLE_JUICE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.CACTUS_JUICE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.CHORUS_FRUIT_JUICE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.GLOW_BERRY_JUICE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.MELON_JUICE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.PUMPKIN_JUICE)));
+        waterContainers.add(new ContainerWithPurity(new ItemStack(TANItems.SWEET_BERRY_JUICE)));
     }
 
     private static void CustomRegister(){
@@ -277,17 +298,31 @@ public class WaterPurity
     {
         if(!item.getOrCreateTag().contains("Purity")) {
             item.getOrCreateTag().putInt("Purity", -1);
-            if (FarmersDelightLoaded) {
-                if (item.is(ModItems.MELON_JUICE.get()) || item.is(ModItems.APPLE_CIDER.get())){
-                    assert item.getTag() != null;
-                    if(Objects.requireNonNull(item.getTag().get("Purity")).getAsString().equals("-1"))
-                        item.getTag().putInt("Purity", 3);
-                }
-
-            }
+            ModPurity(item);
         }
 
         return Objects.requireNonNull(item.getTag()).getInt("Purity");
+    }
+
+    /**
+     * Sets the purity of special items in other mods
+     */
+
+    public static void ModPurity(ItemStack item){
+        assert item.getTag() != null;
+        if (FarmersDelightLoaded) {
+                if (item.is(ModItems.MELON_JUICE.get()) || item.is(ModItems.APPLE_CIDER.get())){
+            if(Objects.requireNonNull(item.getTag().get("Purity")).getAsString().equals("-1"))
+                item.getTag().putInt("Purity", 3);
+                }
+        }
+        if(TANLoaded){
+            item.getTag().putInt("Purity", 3);
+            if(item.is(TANItems.DIRTY_WATER_BOTTLE) || item.is(TANItems.DIRTY_WATER_CANTEEN))
+                item.getTag().putInt("Purity", 0);
+            if(item.is(TANItems.WATER_CANTEEN))
+                item.getTag().putInt("Purity", 2);
+        }
     }
 
     /**
