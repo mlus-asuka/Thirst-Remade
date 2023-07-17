@@ -70,7 +70,7 @@ public class CommonConfig
         BUILDER.pop();
 
         BUILDER.push("Purification levels");
-        KETTLE_PURIFICATION_LEVELS = BUILDER.comment("How many levels of purification are added after boiling in a kettle").define("furnacePurificationLevels", 2);
+        KETTLE_PURIFICATION_LEVELS = BUILDER.comment("How many levels of purification are added after boiling in a kettle").define("kettlePurificationLevels", 2);
         BUILDER.pop();
 
         BUILDER.push("Fermentation levels");
