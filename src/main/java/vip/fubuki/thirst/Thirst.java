@@ -11,6 +11,7 @@ import vip.fubuki.thirst.foundation.common.capability.IThirstCap;
 import vip.fubuki.thirst.foundation.config.ClientConfig;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
 import vip.fubuki.thirst.foundation.config.ItemSettingsConfig;
+import vip.fubuki.thirst.foundation.config.KeyWordConfig;
 import vip.fubuki.thirst.foundation.gui.ThirstBarRenderer;
 import vip.fubuki.thirst.foundation.gui.appleskin.HUDOverlayHandler;
 import vip.fubuki.thirst.foundation.gui.appleskin.TooltipOverlayHandler;
@@ -65,6 +66,7 @@ public class Thirst
         ItemSettingsConfig.setup();
         CommonConfig.setup();
         ClientConfig.setup();
+        KeyWordConfig.setup();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

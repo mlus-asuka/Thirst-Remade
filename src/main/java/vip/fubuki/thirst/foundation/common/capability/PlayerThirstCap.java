@@ -1,5 +1,6 @@
 package vip.fubuki.thirst.foundation.common.capability;
 
+import vectorwing.farmersdelight.common.registry.ModEffects;
 import vip.fubuki.thirst.api.ThirstHelper;
 import vip.fubuki.thirst.foundation.common.damagesource.ModDamageSource;
 import vip.fubuki.thirst.foundation.config.CommonConfig;
@@ -74,12 +75,12 @@ public class PlayerThirstCap implements IThirstCap
     */
     public void tick(Player player)
     {
+        if (player.isCreative()||player.isSpectator()) return;
 
         Difficulty difficulty = player.level().getDifficulty();
-        if (player.isInvulnerable()) return;
-//        if (!ModList.get().isLoaded("farmersdelight") || !player.hasEffect(ModEffects.NOURISHMENT.get())) {
-        updateExhaustion(player);
-//        }
+        if (!ModList.get().isLoaded("farmersdelight") || !player.hasEffect(ModEffects.NOURISHMENT.get())) {
+                updateExhaustion(player);
+        }
 
         if (exhaustion > 4)
         {
@@ -182,7 +183,7 @@ public class PlayerThirstCap implements IThirstCap
 
     public void addExhaustion(Player player, float amount)
     {
-        if (!player.isInvulnerable())
+        if (!player.isCreative()&&!player.isSpectator())
         {
             exhaustion += (amount * ThirstHelper.getExhaustionBiomeModifier(player));
             updateThirstData(player);
