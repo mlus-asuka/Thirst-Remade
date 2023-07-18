@@ -44,7 +44,7 @@ public class ItemSettingsConfig
                                         Arrays.asList("brewinandchewin:vodka", 10, 14),
                                         Arrays.asList("brewinandchewin:rice_wine", 10, 14),
                                         Arrays.asList("brewinandchewin:mead", 10, 14),
-                                        Arrays.asList("brewinandchewin:egg_nog", 10, 14),
+                                        Arrays.asList("brewinandchewin:egg_grog", 10, 14),
                                         Arrays.asList("brewinandchewin:glittering_grenadine", 10, 14),
                                         Arrays.asList("brewinandchewin:bloody_mary", 12, 22),
                                         Arrays.asList("brewinandchewin:salty_folly", 12, 22),

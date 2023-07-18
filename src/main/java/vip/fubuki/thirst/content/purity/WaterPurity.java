@@ -256,7 +256,6 @@ public class WaterPurity
 
                 int purityColor = getPurityColor(purity);
 
-                assert purityText != null;
                 event.getToolTip()
                         .add((new TextComponent(purityText))
                                 .setStyle(Style.EMPTY.withColor(purityColor)));
@@ -312,11 +311,12 @@ public class WaterPurity
         assert item.getTag() != null;
         if (FarmersDelightLoaded) {
                 if (item.is(ModItems.MELON_JUICE.get()) || item.is(ModItems.APPLE_CIDER.get())){
-            if(Objects.requireNonNull(item.getTag().get("Purity")).getAsString().equals("-1"))
-                item.getTag().putInt("Purity", 3);
+                    if(Objects.requireNonNull(item.getTag().get("Purity")).getAsString().equals("-1"))
+                         item.getTag().putInt("Purity", 3);
                 }
         }
         if(TANLoaded){
+            if(!Objects.equals(item.getItem().getCreatorModId(item), "toughasnails")) return;
             item.getTag().putInt("Purity", 3);
             if(item.is(TANItems.DIRTY_WATER_BOTTLE) || item.is(TANItems.DIRTY_WATER_CANTEEN))
                 item.getTag().putInt("Purity", 0);
